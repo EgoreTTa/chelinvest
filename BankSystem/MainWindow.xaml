@@ -1,0 +1,59 @@
+﻿<Window x:Class="BankSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankSystem"
+        mc:Ignorable="d"
+        Title="BankSystem" Height="490" Width="350" HorizontalAlignment="Left" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Height="430" Width="330">
+        <Grid x:Name="Bank" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="NameBankLabel" Content="Название банка" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="NameBankTextBox" HorizontalAlignment="Left" Margin="146,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="149" IsEnabled="False"/>
+            <Grid x:Name="NewAccountOfBankGrid" Background="#19000000" HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="107*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="NameNewAccountOfBankLabel" Content="Название счёта" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label x:Name="NewAccountOfBankLabel" Content="Создание нового счёта" Margin="107,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.RowSpan="2" IsEnabled="False" Width="181"/>
+                <TextBox x:Name="NameNewAccountOfBank" HorizontalAlignment="Right" Margin="0,23,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Row="1"/>
+                <Label x:Name="SumNewAccountOfBankLabel" Content="Сумма" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <TextBox x:Name="SumNewAccountOfBank" HorizontalAlignment="Right" Margin="150,54,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Row="1"/>
+                <Button x:Name="ConfirmCreationOfNewAccountOfBank" Content="Подтвердить" Margin="10,0,10,31" Click="ConfirmCreationOfNewAccountOfBank_Click" Grid.Row="1" Height="20" VerticalAlignment="Bottom"/>
+                <Label x:Name="NewAccountOfBankStatus" Content="" Height="26" VerticalAlignment="Bottom" Grid.Row="1" Background="#261F1F1F"/>
+                <Button x:Name="CancelCreationOfNewAccountOfBank" Content="Отмена" Margin="0,10,198,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Width="92" Grid.RowSpan="2" Click="CancelCreationOfNewAccountOfBank_Click"/>
+            </Grid>
+            <Grid x:Name="AccountOfBankGrid" Height="359" VerticalAlignment="Top" Background="#19000000" Margin="0,41,0,0" Visibility="Collapsed" IsVisibleChanged="AccountOfBankGrid_IsVisibleChanged">
+                <Label x:Name="AccountOfBankLabel" Content="Счет банка" Margin="75,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsEnabled="False"/>
+                <TextBox x:Name="NameAccountOfBank" Margin="0,14,10,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Right" Width="138"/>
+                <Label x:Name="SumAccountOfBankLabel" Content="Сумма на счету" Margin="10,43,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <TextBox x:Name="SumAccountOfBank" Margin="0,47,10,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Right" Width="80"/>
+                <Button x:Name="NewTransactionOfAccount" Content="Новый перевод" Margin="10,74,10,0" VerticalAlignment="Top" Click="NewTransactionOfAccount_Click"/>
+                <Grid x:Name="TransactionOfAccountGrid" Background="#19000000" Margin="10,99,10,10" d:IsHidden="True" IsVisibleChanged="TransactionOfAccountGrid_IsVisibleChanged">
+                    <Label x:Name="TransactionOfAccountLabel" Content="История транкзакций" Height="26" VerticalAlignment="Top" Margin="10,10,10,0" IsEnabled="False"/>
+                    <ListBox x:Name="TransactionOfAccountList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,41,10,10" SelectionChanged="NewTransactionOfAccountListAccounts_SelectionChanged" Background="#FFBFBFBF"/>
+                </Grid>
+                <Grid x:Name="NewTransactionOfAccountGrid" Margin="10,70,10,10" Background="#19000000" IsVisibleChanged="NewTransactionOfAccountGrid_IsVisibleChanged" Visibility="Collapsed">
+                    <Label x:Name="NewTransactionOfAccountToNameLabel" Content="Счет банка" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="NewTransactionOfAccountToName" Margin="0,45,27,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Right" Width="167"/>
+                    <Label x:Name="NewTransactionOfAccountAmountLabel" Content="Сумма перевода" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="NewTransactionOfAccountAmount" Margin="0,76,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78"/>
+                    <Button x:Name="NewTransactionOfAccountConfirm" Content="Подтвердить" Margin="10,0,10,35" Height="20" VerticalAlignment="Bottom" Click="NewTransactionOfAccountConfirm_Click" HorizontalAlignment="Center"/>
+                    <Button x:Name="NewTransactionOfAccountSelectOtherAccount" Content="..." HorizontalAlignment="Left" Margin="258,44,0,0" VerticalAlignment="Top" Click="NewTransactionOfAccountSelectOtherAccount_Click"/>
+                    <ListBox x:Name="NewTransactionOfAccountListOtherAccounts" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFBFBFBF" IsVisibleChanged="NewTransactionOfAccountListAccounts_IsVisibleChanged" Margin="0,72,0,0" SelectionChanged="NewTransactionOfAccountListAccounts_SelectionChanged" Visibility="Collapsed"/>
+                    <Label x:Name="NewTransactionOfAccountLabel" Content="Новый перевод" Height="26" VerticalAlignment="Top" Margin="0,10,10,0" IsEnabled="False" HorizontalAlignment="Right" Width="193"/>
+                    <Label x:Name="NewTransactionOfAccountStatus" Content="" Height="26" VerticalAlignment="Bottom" Background="#261F1F1F"/>
+                    <Button x:Name="ReturnToAccountOfBank" Content="Назад&#xA;" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="60" Click="ReturnToAccountOfBank_Click"/>
+                </Grid>
+                <Button x:Name="ReturnToListOfBankAccounts" Content="Назад&#xD;&#xA;" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="60" Click="ReturnToListOfBankAccounts_Click"/>
+            </Grid>
+            <Grid x:Name="AccountsOfBank" Width="300" HorizontalAlignment="Center" Background="#19000000" Margin="0,45,-1,0" d:IsHidden="True">
+                <ListBox x:Name="ListAccountsOfBank" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#0C000000" SelectionChanged="ListAccountsOfBank_SelectionChanged" VerticalAlignment="Center" Height="271"/>
+                <Label x:Name="LabelForAccountsOfBank" Content="Счета банка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                <Button x:Name="NewAccountOfBank" Content="Создать новый счет" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,10" Click="NewAccountOfBank_Click"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
