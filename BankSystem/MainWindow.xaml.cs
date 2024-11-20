@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BankSystem
+﻿namespace BankSystem
 {
     using Entities;
     using System.Linq;
